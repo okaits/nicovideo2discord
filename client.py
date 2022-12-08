@@ -1,4 +1,4 @@
-""" niconico2discord client program """
+""" nicovideo2discord client program """
 from __future__ import annotations
 
 import datetime

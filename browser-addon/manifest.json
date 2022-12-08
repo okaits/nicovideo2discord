@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "niconico2discord",
+    "name": "nicovideo2discord",
     "version": "0.0.1",
     "description": "ニコニコ動画を見ている際の動画情報をDiscordに表示します。",
     "host_permissions": [
