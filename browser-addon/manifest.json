@@ -1,0 +1,15 @@
+{
+    "manifest_version": 3,
+    "name": "niconico2discord",
+    "version": "0.0.1",
+    "description": "ニコニコ動画を見ている際の動画情報をDiscordに表示します。",
+    "host_permissions": [
+        "http://localhost:5000/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["*://*.nicovideo.jp/watch/*"],
+            "js": ["jquery.js", "main.js"]
+        }
+    ]
+}

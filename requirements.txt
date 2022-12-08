@@ -1,0 +1,2 @@
+xmltodict
+https://github.com/qwertyquerty/pypresence/archive/master.zip
