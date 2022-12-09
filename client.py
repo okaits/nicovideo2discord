@@ -10,7 +10,9 @@ import urllib.request
 import pypresence
 import xmltodict
 
-CLIENT_ID = "DISCORD_CLIENT_ID_HERE"
+with open("config.json", encoding="UTF-8") as configfile:
+    config = json.load(configfile)
+CLIENT_ID = config["client_id"]
 RPC = pypresence.Presence(CLIENT_ID)
 RPC.connect()
 
