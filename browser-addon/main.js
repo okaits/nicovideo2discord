@@ -7,21 +7,23 @@ function senddata() {
     var sec = time % 60;
     console.debug("Playing: " + !ispaused);
     var videoid = window.location.pathname.split("/").pop();
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:5000/video",
-        data: JSON.stringify({'status': 'opened', 'videoid': videoid, 'playing': !ispaused, 'ended': false, 'hour': hour, 'min': min, 'sec': sec}),
-        contentType: "application/json; charset=UTF-8"
+    fetch("http://localhost:5000/video", {
+        method: "POST",
+        body: JSON.stringify({'status': 'opened', 'videoid': videoid, 'playing': !ispaused, 'ended': false, 'hour': hour, 'min': min, 'sec': sec}),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
     });
 };
 
 function end() {
     var videoid = window.location.pathname.split("/").pop();
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:5000/video",
-        data: JSON.stringify({'status': 'opened', 'videoid': videoid, 'playing': false, 'ended': true}),
-        contentType: "application/json; charset=UTF-8"
+    fetch("http://localhost:5000/video", {
+        method: "POST",
+        body: JSON.stringify({'status': 'opened', 'videoid': videoid, 'playing': false, 'ended': true}),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
     });
 };
 
