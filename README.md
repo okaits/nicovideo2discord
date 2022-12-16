@@ -22,7 +22,7 @@
 
 #### クライアントの準備
 1. [このレポジトリ](https://github.com/okaits/nicovideo2discord)をcloneします
-2. [この記事](https://qiita.com/masayoshi4649/items/46fdb744cb8255f5eb98)を参考に、CLIENT IDをDiscord developper potalから取得します
+2. [この記事](https://qiita.com/masayoshi4649/items/46fdb744cb8255f5eb98)を参考に、CLIENT IDをDiscord developer potalから取得します
 3. 取得したら、client.pyにある変数`CLIENT_ID`にそれをペーストし、保存します
 
 ### 実行
