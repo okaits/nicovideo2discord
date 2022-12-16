@@ -38,8 +38,7 @@ token = Auth.Token()
 token.get(Auth.User("user1", "password"))
 
 videodata_request = urllib.request.Request("http://localhost:5000/video", headers={"Authorization": f"Bearer {token.token}"})
-beforevideodata = {}
-beforeestimatedendtime = datetime.timedelta(seconds=0)
+beforevideodata = {'status': 'closed'}
 while True:
     try:
         videodata = json.loads(urllib.request.urlopen(videodata_request).read().decode())
@@ -49,7 +48,7 @@ while True:
         continue
     if videodata != beforevideodata:
         print(videodata)
-        if videodata["status"] == "closed":
+        if videodata["status"] != "opened":
             RPC.clear()
             beforevideodata = videodata
             continue
@@ -68,11 +67,6 @@ while True:
             videolength = datetime.timedelta(hours=int(videolength[0]), minutes=int(videolength[1]), seconds=int(videolength[2]))
         playingtime = datetime.timedelta(hours=int(videodata["hour"]), minutes=int(videodata["min"]), seconds=int(videodata["sec"]))
         startedtime = datetime.datetime.now().replace(microsecond=0) - playingtime
-        estimatedendtime = datetime.datetime.now().replace(microsecond=0) + videolength - playingtime
-        if estimatedendtime == beforeestimatedendtime and videodata["sec"] == beforevideodata["sec"]:
-            beforevideodata = videodata
-            time.sleep(1)
-            continue
         try:
             author = video["user_nickname"]
         except KeyError:
@@ -89,7 +83,6 @@ while True:
                 large_image=thumbnail_url,
                 large_text=vid,
                 start=startedtime.timestamp(),
-                end=estimatedendtime.timestamp(),
                 buttons=[{"label": "動画を視聴する", "url": url}],
                 instance=True
             )
