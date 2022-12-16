@@ -38,5 +38,8 @@ Discord Rich Presenceは変更にDiscordクライアントのRPCを使用する�
 （server.pyを実行した後に別端末などで実行してください。）
 
 ## Contributing
+
+### License
+[MIT License](LICENSE.md)
 ### Contributer
 * [okaits#7534](https://info.okaits7534.mydns.jp)
