@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import datetime
-import hashlib
 import json
 import time
 import urllib.request
@@ -16,36 +15,9 @@ CLIENT_ID = config["client_id"]
 RPC = pypresence.Presence(CLIENT_ID)
 RPC.connect()
 
-class Auth():
-    """ Class about Auth information """
-    class User():
-        """ Class about user information """
-        def __init__(self, username: str, password: str):
-            self.username = username
-            self.password = hashlib.sha256()
-            self.password.update(password.encode())
-            self.password = self.password.hexdigest()
-    class Token():
-        """ JMT class """
-        def __init__(self):
-            self.token = ""
-        def get(self, user: Auth.User):
-            """ Get JMT from server """
-            tokenrequest = urllib.request.Request("http://localhost:5000/login", headers={"Content-type": "application/json"}, data=json.dumps({"user": user.username, "password": user.password}).encode())
-            self.token = json.load(urllib.request.urlopen(tokenrequest))["token"]
-
-token = Auth.Token()
-token.get(Auth.User("user1", "password"))
-
-videodata_request = urllib.request.Request("http://localhost:5000/video", headers={"Authorization": f"Bearer {token.token}"})
 beforevideodata = {'status': 'closed'}
 while True:
-    try:
-        videodata = json.loads(urllib.request.urlopen(videodata_request).read().decode())
-    except urllib.error.HTTPError:
-        token.get(Auth.User("user1", "password"))
-        videodata_request = urllib.request.Request("http://localhost:5000/video", headers={"Authorization": f"Bearer {token.token}"})
-        continue
+    videodata = json.loads(urllib.request.urlopen("http://localhost:5000/video").read().decode())
     if videodata != beforevideodata:
         print(videodata)
         if videodata["status"] != "opened":

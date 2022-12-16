@@ -1,51 +1,19 @@
-token = ""
-function beforeunload(token) {
+function beforeunload() {
     // navigator.sendBeacon("http://localhost:5000/video", JSON.stringify({"status": "closed"}));
     body = JSON.stringify({"status": "closed"});
     fetch("http://localhost:5000/video", {
         method: 'POST',
         body: JSON.stringify({"status": "closed"}),
         headers: {
-            "Content-type": "application/json",
-            "Authorization": "Bearer " + this.token
+            "Content-type": "application/json"
         },
         keepalive: true
     });
 };
 
-function ajaxerror(xhr, testStatus, errorThrown) {
-    if (xhr.status == 401) {
-        console.log("Reloading token...")
-        token = gettoken("password")
-    };
-};
-
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 };
-
-async function gettoken(password) {
-    tokenrecv = $.ajax(
-        {
-            type: "POST",
-            url: "http://localhost:5000/login",
-            data: JSON.stringify({"user": "user1", "password": password}),
-            contentType: "application/json; charset=UTF-8"
-        }
-    );
-    while (true) {
-        await sleep(50);
-        if (tokenrecv.responseJSON == undefined) {
-            continue;
-        } else {
-            token = tokenrecv.responseJSON["token"];
-            window.addEventListener('beforeunload', {token: token, handleEvent: beforeunload});
-            return token
-        };
-    };
-};
-
-token = gettoken("password");
 
 async function loop() {
     var beforepaused = true;
@@ -66,9 +34,8 @@ async function loop() {
             type: "POST",
             url: "http://localhost:5000/video",
             data: JSON.stringify({'status': 'opened', 'videoid': videoid, 'playing': !ispaused, 'hour': hour, 'min': min, 'sec': sec}),
-            headers: {"Authorization": "Bearer " + token},
-            contentType: "application/json; charset=UTF-8",
-            error: ajaxerror});
+            contentType: "application/json; charset=UTF-8"
+        });
         beforepaused = ispaused;
     };
 };

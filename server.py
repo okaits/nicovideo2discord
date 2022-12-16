@@ -11,50 +11,15 @@ import urllib.request
 import xmltodict
 from flask import Flask, Response, jsonify, request
 from flask_cors import CORS
-from flask_jwt_extended import (JWTManager, create_access_token,
-                                get_jwt_identity, jwt_required)
 
 app = Flask(__name__)
-app.config["JWT_SECRET_KEY"] = "secret-password"
-jwt = JWTManager(app)
 CORS(app)
-id_dict = {"user1": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"}
 class Data():
     """ Data class """
-    status = {"user1": {"status": "closed"}}
+    status = {"status": "closed"}
     cache = {}
 
-
-def jwt_unauthorized_loader_handler(_):
-    return jsonify({"msg": "unauthorized"}), "401 Unauthorized"
-jwt.unauthorized_loader(jwt_unauthorized_loader_handler)
-
-@app.route("/login", methods=["POST"])
-def login():
-    if request.content_type.split(";")[0] == "application/json":
-        data = request.json
-    elif request.content_type.split(";")[0] == "text/plain":
-        data = json.loads(request.data)
-    else:
-        return jsonify({"msg": "bad content-type"}), "415 Unsupported media type"
-    try:
-        if data["user"] in id_dict:
-            if data["password"] == id_dict[data["user"]]:
-                user = data["user"]
-            else:
-                pwhash = hashlib.sha256()
-                pwhash.update(data["password"].encode())
-                if pwhash.hexdigest() == id_dict[data["user"]]:
-                    user = data["user"]
-                else:
-                    return jsonify({"msg": "Unauthorized"}), "401 Unauthorized"
-    except KeyError:
-        return jsonify({"msg": "Unprocessable json"}), "400 Bad request"
-    token = create_access_token(identity=user)
-    return jsonify({"msg": "ok", "token": token}), "200 OK"
-
 @app.route("/video", methods=["POST", "GET"])
-@jwt_required()
 def video():
     """ API /video """
     if request.method == "POST":
@@ -67,15 +32,15 @@ def video():
         print(data)
         try:
             if data["status"] == "closed":
-                Data.status[get_jwt_identity()] = {"status": data["status"]}
+                Data.status = {"status": data["status"]}
                 return jsonify({"msg": "success"}), "201 Created"
-            Data.status[get_jwt_identity()] = {"status": data["status"],"id": data["videoid"], "playing": data["playing"], "hour": data["hour"], "min": data["min"], "sec": str(math.floor(int(data["sec"])))}
+            Data.status = {"status": data["status"],"id": data["videoid"], "playing": data["playing"], "hour": data["hour"], "min": data["min"], "sec": str(math.floor(int(data["sec"])))}
         except KeyError:
             print(data)
             return jsonify({"msg": "missing value"}), "400 Bad Request"
         return jsonify({"msg": "success"}), "201 Created"
     elif request.method == "GET":
-        return jsonify(Data.status[get_jwt_identity()]), "200 OK"
+        return jsonify(Data.status), "200 OK"
 
 @app.route("/videoinfo", methods=["GET"])
 def videoinfo():
