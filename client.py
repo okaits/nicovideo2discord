@@ -37,14 +37,17 @@ while True:
             videolength = datetime.timedelta(minutes=int(videolength[0]), seconds=int(videolength[1]))
         elif len(videolength) == 3:
             videolength = datetime.timedelta(hours=int(videolength[0]), minutes=int(videolength[1]), seconds=int(videolength[2]))
-        playingtime = datetime.timedelta(hours=int(videodata["hour"]), minutes=int(videodata["min"]), seconds=int(videodata["sec"]))
-        startedtime = datetime.datetime.now().replace(microsecond=0) - playingtime
+        if videodata["ended"] is False:
+            playingtime = datetime.timedelta(hours=int(videodata["hour"]), minutes=int(videodata["min"]), seconds=int(videodata["sec"]))
+            startedtime = datetime.datetime.now().replace(microsecond=0) - playingtime
         try:
             author = video["user_nickname"]
         except KeyError:
             author = video["ch_name"]
         if videodata["playing"] is True:
             statemsg = f'{video["title"]}'
+        elif videodata["ended"] is True:
+            statemsg = f'{video["title"]} (再生終了)'
         else:
             statemsg = f'{video["title"]} (一時停止中)'
         detailsmsg = f'投稿者: {author}'

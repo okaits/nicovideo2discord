@@ -1,43 +1,47 @@
-function beforeunload() {
-    // navigator.sendBeacon("http://localhost:5000/video", JSON.stringify({"status": "closed"}));
-    body = JSON.stringify({"status": "closed"});
+function senddata() {
+    var player = this;
+    var ispaused = player.paused;
+    var time = player.currentTime;
+    var hour = Math.floor(time / 3600);
+    var min = Math.floor(time % 3600 / 60);
+    var sec = time % 60;
+    console.debug("Playing: " + !ispaused);
+    var videoid = window.location.pathname.split("/").pop();
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:5000/video",
+        data: JSON.stringify({'status': 'opened', 'videoid': videoid, 'playing': !ispaused, 'ended': false, 'hour': hour, 'min': min, 'sec': sec}),
+        contentType: "application/json; charset=UTF-8"
+    });
+};
+
+function end() {
+    var videoid = window.location.pathname.split("/").pop();
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:5000/video",
+        data: JSON.stringify({'status': 'opened', 'videoid': videoid, 'playing': false, 'ended': true}),
+        contentType: "application/json; charset=UTF-8"
+    });
+};
+
+function close() {
     fetch("http://localhost:5000/video", {
         method: 'POST',
-        body: JSON.stringify({"status": "closed"}),
+        body: JSON.stringify({'status': 'closed'}),
         headers: {
-            "Content-type": "application/json"
+            "Content-type": "application/json; charset=UTF-8"
         },
         keepalive: true
     });
 };
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+function onload() {
+    var player = document.getElementById("MainVideoPlayer").firstElementChild;
+    player.addEventListener("play", senddata);
+    player.addEventListener("pause", senddata);
+    player.addEventListener("ended", end);
 };
 
-async function loop() {
-    var beforepaused = true;
-    while (true) {
-        await sleep(500);
-        var player = document.getElementById("MainVideoPlayer").firstElementChild;
-        var ispaused = player.paused;
-        var time = player.currentTime;
-        var hour = Math.floor(time / 3600);
-        var min = Math.floor(time % 3600 / 60);
-        var sec = time % 60;
-        if (ispaused == beforepaused) {
-            continue;
-        };
-        console.debug("Playing: " + !ispaused);
-        var videoid = window.location.pathname.split("/").pop();
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:5000/video",
-            data: JSON.stringify({'status': 'opened', 'videoid': videoid, 'playing': !ispaused, 'hour': hour, 'min': min, 'sec': sec}),
-            contentType: "application/json; charset=UTF-8"
-        });
-        beforepaused = ispaused;
-    };
-};
-console.debug("start")
-loop();
+window.addEventListener("load", onload);
+window.addEventListener("beforeunload", close)

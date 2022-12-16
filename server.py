@@ -34,7 +34,10 @@ def video():
             if data["status"] == "closed":
                 Data.status = {"status": data["status"]}
                 return jsonify({"msg": "success"}), "201 Created"
-            Data.status = {"status": data["status"],"id": data["videoid"], "playing": data["playing"], "hour": data["hour"], "min": data["min"], "sec": str(math.floor(int(data["sec"])))}
+            elif data["ended"] is True:
+                Data.status = {"status": data["status"], "id": data["videoid"], "ended": data["ended"], "playing": data["playing"]}
+                return jsonify({"msg": "success"}), "201 Created"
+            Data.status = {"status": data["status"],"id": data["videoid"], "ended": data["ended"], "playing": data["playing"], "hour": data["hour"], "min": data["min"], "sec": str(math.floor(int(data["sec"])))}
         except KeyError:
             print(data)
             return jsonify({"msg": "missing value"}), "400 Bad Request"
