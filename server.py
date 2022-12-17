@@ -3,7 +3,6 @@ nicovideo2discord
 このプログラムを使うと、ニコニコ動画で視聴している動画をDiscordのアクティビティに登録できます。
 """
 
-import hashlib
 import json
 import math
 import urllib.request
