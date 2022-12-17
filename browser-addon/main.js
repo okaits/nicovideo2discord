@@ -42,6 +42,9 @@ function onload() {
     var player = document.getElementById("MainVideoPlayer").firstElementChild;
     player.addEventListener("play", senddata);
     player.addEventListener("pause", senddata);
+    player.addEventListener("waiting", senddata);
+    player.addEventListener("seeking", senddata);
+    player.addEventListener("seeked", senddata);
     player.addEventListener("ended", end);
 };
 
