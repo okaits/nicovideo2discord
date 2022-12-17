@@ -22,8 +22,9 @@
 
 #### クライアントの準備
 1. [このレポジトリ](https://github.com/okaits/nicovideo2discord)をcloneします
-2. [この記事](https://qiita.com/masayoshi4649/items/46fdb744cb8255f5eb98)を参考に、CLIENT IDをDiscord developer potalから取得します
-3. 取得したら、client.pyにある変数`CLIENT_ID`にそれをペーストし、保存します
+2. config-example.jsonをconfig.jsonに改名/コピーします
+3. [この記事](https://qiita.com/masayoshi4649/items/46fdb744cb8255f5eb98)を参考に、CLIENT IDをDiscord developer potalから取得します
+4. 取得したら、config.jsonの`client_id`の値にCLIENT IDを指定して、[^1]保存します。
 
 ### 実行
 #### コンテンツスクリプト
@@ -39,3 +40,5 @@ Discord Rich Presenceは変更にDiscordクライアントのRPCを使用する�
 [MIT License](LICENSE.md)
 ### Contributer
 * [okaits#7534](https://info.okaits7534.mydns.jp)
+
+[^1]: デフォルトでは`2525252525`になっていますが、このままでは上手く動きません。正しい値を保存してください。
