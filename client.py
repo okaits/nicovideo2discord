@@ -19,7 +19,7 @@ beforevideodata = {'status': 'closed'}
 while True:
     videodata = json.loads(urllib.request.urlopen("http://localhost:5000/video").read().decode())
     if videodata != beforevideodata:
-        print(videodata)
+        print("Data changed.")
         if videodata["status"] != "opened":
             RPC.clear()
             beforevideodata = videodata
@@ -44,12 +44,13 @@ while True:
             author = video["user_nickname"]
         except KeyError:
             author = video["ch_name"]
-        if videodata["playing"] is True:
-            statemsg = f'{video["title"]}'
-        elif videodata["ended"] is True:
-            statemsg = f'{video["title"]} (再生終了)'
-        else:
-            statemsg = f'{video["title"]} (一時停止中)'
+        statemsg = f'{video["title"]}'
+        if videodata["playing"] is False:
+            statemsg = f'{statemsg} (一時停止中)'
+        if videodata["speed"] != 1:
+            statemsg = f'{statemsg} ({videodata["speed"]}倍速)'
+        if videodata["ended"] is True:
+            statemsg = f'{statemsg} (再生終了)'
         detailsmsg = f'投稿者: {author}'
         if videodata["playing"] is True:
             RPC.update(

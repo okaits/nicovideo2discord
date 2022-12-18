@@ -2,6 +2,7 @@ function senddata() {
     var player = this;
     var ispaused = player.paused;
     var time = player.currentTime;
+    var speed = player.playbackRate;
     var hour = Math.floor(time / 3600);
     var min = Math.floor(time % 3600 / 60);
     var sec = time % 60;
@@ -9,7 +10,7 @@ function senddata() {
     var videoid = window.location.pathname.split("/").pop();
     fetch("http://localhost:5000/video", {
         method: "POST",
-        body: JSON.stringify({'status': 'opened', 'videoid': videoid, 'playing': !ispaused, 'ended': false, 'hour': hour, 'min': min, 'sec': sec}),
+        body: JSON.stringify({'status': 'opened', 'videoid': videoid, 'playing': !ispaused, 'ended': false, 'hour': hour, 'min': min, 'sec': sec, 'speed': speed}),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
@@ -45,6 +46,7 @@ function onload() {
     player.addEventListener("waiting", senddata);
     player.addEventListener("seeking", senddata);
     player.addEventListener("seeked", senddata);
+    player.addEventListener("ratechange", senddata);
     player.addEventListener("ended", end);
 };
 

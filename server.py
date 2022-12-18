@@ -28,7 +28,6 @@ def video():
             data = json.loads(request.data)
         else:
             return jsonify({"msg": "bad content-type"}), "415 Unsupported media type"
-        print(data)
         try:
             if data["status"] == "closed":
                 Data.status = {"status": data["status"]}
@@ -36,9 +35,8 @@ def video():
             elif data["ended"] is True:
                 Data.status = {"status": data["status"], "id": data["videoid"], "ended": data["ended"], "playing": data["playing"]}
                 return jsonify({"msg": "success"}), "201 Created"
-            Data.status = {"status": data["status"],"id": data["videoid"], "ended": data["ended"], "playing": data["playing"], "hour": data["hour"], "min": data["min"], "sec": str(math.floor(int(data["sec"])))}
+            Data.status = {"status": data["status"],"id": data["videoid"], "ended": data["ended"], "playing": data["playing"], "hour": data["hour"], "min": data["min"], "sec": str(math.floor(int(data["sec"]))), "speed": data["speed"]}
         except KeyError:
-            print(data)
             return jsonify({"msg": "missing value"}), "400 Bad Request"
         return jsonify({"msg": "success"}), "201 Created"
     elif request.method == "GET":
