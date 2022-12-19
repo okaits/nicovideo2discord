@@ -51,10 +51,5 @@ function onload() {
     senddata();
 };
 
-if (document.readyState != "loading") {
-    onload();
-} else {
-    document.addEventListener("load", onload);
-};
-
+window.addEventListener("load", onload)
 window.addEventListener("beforeunload", close);
