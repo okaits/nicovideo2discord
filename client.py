@@ -20,8 +20,17 @@ while True:
     videodata = json.loads(urllib.request.urlopen("http://localhost:5000/video").read().decode())
     if videodata != beforevideodata:
         print("Data changed.")
-        if videodata["status"] != "opened":
+        if videodata["status"] == "closed":
             RPC.clear()
+            beforevideodata = videodata
+            continue
+        elif videodata["status"] == "videointro":
+            RPC.update(
+                state="トップページ: いきなり！動画紹介を視聴中",
+                large_image="https://nicovideo.cdn.nimg.jp/web/images/favicon/144.png",
+                large_text="ニコニコテレビちゃん",
+                buttons=[{"label": "ニコニコ動画トップページ", "url": "https://www.nicovideo.jp/video_top"}]
+            )
             beforevideodata = videodata
             continue
         video = xmltodict.parse(urllib.request.urlopen(f'http://localhost:5000/videoinfo?vid={videodata["id"]}').read().decode())

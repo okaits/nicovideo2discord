@@ -32,6 +32,9 @@ def video():
             if data["status"] == "closed":
                 Data.status = {"status": data["status"]}
                 return jsonify({"msg": "success"}), "201 Created"
+            elif data["status"] == "videointro":
+                Data.status = {"status": data["status"]}
+                return jsonify({"msg": "success"}), "201 Created"
             elif data["ended"] is True:
                 Data.status = {"status": data["status"], "id": data["videoid"], "ended": data["ended"], "playing": data["playing"]}
                 return jsonify({"msg": "success"}), "201 Created"

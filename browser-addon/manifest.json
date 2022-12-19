@@ -10,6 +10,10 @@
         {
             "matches": ["*://www.nicovideo.jp/watch/*"],
             "js": ["main.js"]
+        },
+        {
+            "matches": ["*://www.nicovideo.jp/video_top"],
+            "js": ["videointroduction.js"]
         }
     ]
 }
