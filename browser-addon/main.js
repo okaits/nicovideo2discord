@@ -1,5 +1,5 @@
 function senddata() {
-    var player = document.getElementById("MainVideoPlayer").firstElementChild;
+    var player = document.querySelector("#MainVideoPlayer > video");
     var ispaused = player.paused;
     var time = player.currentTime;
     var speed = player.playbackRate;
@@ -40,7 +40,7 @@ function close() {
 };
 
 function onload() {
-    var player = document.getElementById("MainVideoPlayer").firstElementChild;
+    var player = document.querySelector("#MainVideoPlayer > video")
     player.addEventListener("play", senddata);
     player.addEventListener("pause", senddata);
     player.addEventListener("waiting", senddata);
