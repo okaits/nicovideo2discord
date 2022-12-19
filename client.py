@@ -68,7 +68,10 @@ while True:
                 large_image=thumbnail_url,
                 large_text=vid,
                 start=startedtime.timestamp(),
-                buttons=[{"label": "動画を視聴する", "url": url}],
+                buttons=[
+                    {"label": "動画を視聴する", "url": url},
+                    {"label": "ニコニコ動画トップページ", "url": "https://www.nicovideo.jp/video_top/"}
+                ],
                 instance=True
             )
         else:
@@ -77,7 +80,10 @@ while True:
                 details=detailsmsg,
                 large_image=thumbnail_url,
                 large_text="Thumbnail",
-                buttons=[{"label": "動画を視聴する", "url": url}]
+                buttons=[
+                    {"label": "動画を視聴する", "url": url},
+                    {"label": "ニコニコ動画トップページ", "url": "https://www.nicovideo.jp/video_top/"}
+                ]
             )
     beforevideodata = videodata
     time.sleep(1)
