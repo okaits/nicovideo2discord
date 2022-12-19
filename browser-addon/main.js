@@ -1,5 +1,5 @@
 function senddata() {
-    var player = this;
+    var player = document.getElementById("MainVideoPlayer").firstElementChild;
     var ispaused = player.paused;
     var time = player.currentTime;
     var speed = player.playbackRate;
@@ -48,7 +48,13 @@ function onload() {
     player.addEventListener("seeked", senddata);
     player.addEventListener("ratechange", senddata);
     player.addEventListener("ended", end);
+    senddata();
 };
 
-window.addEventListener("load", onload);
-window.addEventListener("beforeunload", close)
+if (document.readyState != "loading") {
+    onload();
+} else {
+    document.addEventListener("load", onload);
+};
+
+window.addEventListener("beforeunload", close);
