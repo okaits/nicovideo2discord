@@ -67,6 +67,8 @@ while True:
                 details=detailsmsg,
                 large_image=thumbnail_url,
                 large_text=vid,
+                small_image="https://nicovideo.cdn.nimg.jp/web/images/favicon/144.png",
+                small_text="ニコニコテレビちゃん",
                 start=startedtime.timestamp(),
                 buttons=[
                     {"label": "動画を視聴する", "url": url},
@@ -79,6 +81,8 @@ while True:
                 state=statemsg,
                 details=detailsmsg,
                 large_image=thumbnail_url,
+                small_image="https://nicovideo.cdn.nimg.jp/web/images/favicon/144.png",
+                small_text="ニコニコテレビちゃん",
                 large_text="Thumbnail",
                 buttons=[
                     {"label": "動画を視聴する", "url": url},
