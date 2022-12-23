@@ -40,7 +40,7 @@ function close() {
 };
 
 function onload() {
-    var player = document.querySelector("#MainVideoPlayer > video")
+    var player = document.querySelector("#MainVideoPlayer > video");
     player.addEventListener("play", senddata);
     player.addEventListener("pause", senddata);
     player.addEventListener("waiting", senddata);
@@ -51,5 +51,5 @@ function onload() {
     senddata();
 };
 
-window.addEventListener("load", onload)
+window.addEventListener("load", onload);
 window.addEventListener("beforeunload", close);

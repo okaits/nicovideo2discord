@@ -16,7 +16,7 @@ function close() {
         },
         keepalive: true
     });
-}
+};
 
-senddata()
-window.addEventListener("beforeunload", close)
+senddata();
+window.addEventListener("beforeunload", close);
