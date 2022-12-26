@@ -56,7 +56,7 @@ while True:
         statemsg = f'{video["title"]}'
         if videodata["playing"] is False:
             statemsg = f'{statemsg} (一時停止中)'
-        if videodata["speed"] != 1:
+        if "speed" in videodata and videodata["speed"] != 1:
             statemsg = f'{statemsg} ({videodata["speed"]}倍速)'
         if videodata["ended"] is True:
             statemsg = f'{statemsg} (再生終了)'
