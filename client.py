@@ -33,6 +33,15 @@ while True:
             )
             beforevideodata = videodata
             continue
+        elif videodata["status"] == "ranking":
+            RPC.update(
+                state="ランキングを閲覧中",
+                large_image="https://nicovideo.cdn.nimg.jp/web/images/favicon/144.png",
+                large_text="ニコニコテレビちゃん",
+                buttons=[{"label": "ニコニコ動画トップページ", "url": "https://www.nicovideo.jp/video_top"}, {"label": "ニコニコ動画総合ランキング", "url": "https://www.nicovideo.jp/ranking"}]
+            )
+            beforevideodata = videodata
+            continue
         video = xmltodict.parse(urllib.request.urlopen(f'http://localhost:5000/videoinfo?vid={videodata["id"]}').read().decode())
         video = video["nicovideo_thumb_response"]["thumb"]
         title = video["title"]

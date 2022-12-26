@@ -32,7 +32,7 @@ def video():
             if data["status"] == "closed":
                 Data.status = {"status": data["status"]}
                 return jsonify({"msg": "success"}), "201 Created"
-            elif data["status"] == "videointro":
+            elif data["status"] == "videointro" or data["status"] == "ranking":
                 Data.status = {"status": data["status"]}
                 return jsonify({"msg": "success"}), "201 Created"
             elif data["ended"] is True:

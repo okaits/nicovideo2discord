@@ -14,6 +14,10 @@
         {
             "matches": ["*://www.nicovideo.jp/video_top*"],
             "js": ["videointroduction.js"]
+        },
+        {
+            "matches": ["*://www.nicovideo.jp/ranking*"],
+            "js": ["ranking.js"]
         }
     ]
 }
