@@ -26,7 +26,7 @@ while True:
             continue
         elif videodata["status"] == "videointro":
             RPC.update(
-                state="トップページ: いきなり！動画紹介を視聴中",
+                state="トップページ",
                 large_image="https://nicovideo.cdn.nimg.jp/web/images/favicon/144.png",
                 large_text="ニコニコテレビちゃん",
                 buttons=[{"label": "ニコニコ動画トップページ", "url": "https://www.nicovideo.jp/video_top"}]
@@ -63,12 +63,12 @@ while True:
         except KeyError:
             author = video["ch_name"]
         statemsg = f'{video["title"]}'
-        if videodata["playing"] is False:
+        if videodata["playing"] is False and videodata["ended"] is False:
             statemsg = f'{statemsg} (一時停止中)'
+        elif videodata["ended"] is True:
+            statemsg = f'{statemsg} (再生終了)'
         if "speed" in videodata and videodata["speed"] != 1:
             statemsg = f'{statemsg} ({videodata["speed"]}倍速)'
-        if videodata["ended"] is True:
-            statemsg = f'{statemsg} (再生終了)'
         detailsmsg = f'投稿者: {author}'
         if videodata["playing"] is True:
             RPC.update(
