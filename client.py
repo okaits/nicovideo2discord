@@ -9,6 +9,8 @@ import urllib.request
 import pypresence
 import xmltodict
 
+genres = {"entertainment": "エンターテインメント", "radio": "ラジオ", "music_sound": "音楽・サウンド", "dance": "ダンス", "animal": "動物", "nature": "自然", "cooking": "料理", "traveling_outdoor": "旅行・アウトドア", "vehicle": "乗り物", "sports": "スポーツ", "society_politics_news": "社会・政治・時事", "technology_craft": "技術・工作", "解説・講座": "commentary_lecture", "anime": "アニメ", "game": "ゲーム", "other": "その他"}
+
 with open("config.json", encoding="UTF-8") as configfile:
     config = json.load(configfile)
 CLIENT_ID = config["client_id"]
@@ -39,6 +41,16 @@ while True:
                 large_image="https://nicovideo.cdn.nimg.jp/web/images/favicon/144.png",
                 large_text="ニコニコテレビちゃん",
                 buttons=[{"label": "ニコニコ動画トップページ", "url": "https://www.nicovideo.jp/video_top"}, {"label": "ニコニコ動画総合ランキング", "url": "https://www.nicovideo.jp/ranking"}]
+            )
+            beforevideodata = videodata
+            continue
+        elif videodata["status"] == "genretoppages":
+            RPC.update(
+                state=f'ジャンル: {genres[videodata["genre"]]}',
+                details="ジャンル別トップページを閲覧中",
+                large_image="https://nicovideo.cdn.nimg.jp/web/images/favicon/144.png",
+                large_text="ニコニコテレビちゃん",
+                buttons=[{"label": "ニコニコ動画トップページ", "url": "https://www.nicovideo.jp/video_top"}, {"label": "該当ジャンルトップページ", "url": f'https://www.nicovideo.jp/video_top/genre/{videodata["genre"]}'}]
             )
             beforevideodata = videodata
             continue

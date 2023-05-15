@@ -35,6 +35,9 @@ def video():
             elif data["status"] == "toppage" or data["status"] == "ranking":
                 Data.status = {"status": data["status"]}
                 return jsonify({"msg": "success"}), "201 Created"
+            elif data["status"] == "genretoppages":
+                Data.status = {"status": data["status"], "genre": data["genre"]}
+                return jsonify({"msg": "success"}), "201 Created"
             elif data["ended"] is True:
                 Data.status = {"status": data["status"], "id": data["videoid"], "ended": data["ended"], "playing": data["playing"]}
                 return jsonify({"msg": "success"}), "201 Created"

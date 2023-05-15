@@ -12,8 +12,12 @@
             "js": ["main.js"]
         },
         {
-            "matches": ["*://www.nicovideo.jp/video_top*"],
+            "matches": ["*://www.nicovideo.jp/video_top/"],
             "js": ["toppage.js"]
+        },
+        {
+            "matches": ["*://www.nicovideo.jp/video_top/genre*"],
+            "js": ["genretoppages.js"]
         },
         {
             "matches": ["*://www.nicovideo.jp/ranking*"],
