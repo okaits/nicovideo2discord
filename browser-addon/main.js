@@ -1,5 +1,7 @@
-function senddata() {
+function senddata() { // Send video info
     var player = document.querySelector("#MainVideoPlayer > video");
+
+    // Video metadata
     var ispaused = player.paused;
     var time = player.currentTime;
     var speed = player.playbackRate;
@@ -8,6 +10,8 @@ function senddata() {
     var sec = time % 60;
     console.debug("Playing: " + !ispaused);
     var videoid = window.location.pathname.split("/").pop();
+
+    // Send
     fetch("http://localhost:5000/video", {
         method: "POST",
         body: JSON.stringify({'status': 'opened', 'videoid': videoid, 'playing': !ispaused, 'ended': false, 'hour': hour, 'min': min, 'sec': sec, 'speed': speed}),
@@ -17,8 +21,10 @@ function senddata() {
     });
 };
 
-function end() {
+function end() { // Video ended
     var videoid = window.location.pathname.split("/").pop();
+
+    // Video metadata
     fetch("http://localhost:5000/video", {
         method: "POST",
         body: JSON.stringify({'status': 'opened', 'videoid': videoid, 'playing': false, 'ended': true}),
@@ -28,7 +34,7 @@ function end() {
     });
 };
 
-function close() {
+function close() { // Page closed
     fetch("http://localhost:5000/video", {
         method: 'POST',
         body: JSON.stringify({'status': 'closed'}),
@@ -39,8 +45,10 @@ function close() {
     });
 };
 
-function onload() {
+function onload() { // Page opened
     var player = document.querySelector("#MainVideoPlayer > video");
+
+    // Add event listners
     player.addEventListener("play", senddata);
     player.addEventListener("pause", senddata);
     player.addEventListener("waiting", senddata);
