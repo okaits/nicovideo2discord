@@ -77,6 +77,18 @@ def video():
     elif request.method == "GET":
         return jsonify(Data.status), "200 OK"
 
+@app.route("/debug", methods=["POST"])
+def debug():
+    """ API /debug """
+    # Check Content-Type
+    if request.content_type.split(";")[0] == "text/plain":
+        data = f"from client: {request.data.decode()}"
+    else:
+        return jsonify({"msg": "bad content-type"}), "415 Unsupported media type"
+
+    app.logger.debug(data) # pylint: disable=E1101
+    return jsonify({"msg": "success"}), "200 OK"
+
 @app.route("/videoinfo", methods=["GET"])
 def videoinfo():
     """ API /videoinfo """

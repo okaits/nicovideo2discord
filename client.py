@@ -28,6 +28,11 @@ genres = { #Genres list
     "other": "その他"
 }
 
+def debug(message: str, contentType: str = "text/plain") -> urllib.response:
+    headers = {"Content-Type": contentType}
+    req = urllib.request.Request("http://localhost:5000/debug", message.encode(), headers)
+    return urllib.request.urlopen(req)
+
 with open("config.json", encoding="UTF-8") as configfile:
     config = json.load(configfile)
 CLIENT_ID = config["client_id"]
@@ -38,7 +43,7 @@ beforevideodata = {'status': 'closed'}
 while True:
     videodata = json.loads(urllib.request.urlopen("http://localhost:5000/video").read().decode())
     if videodata != beforevideodata:
-        # Data changed
+        debug("Data changed.")
 
         if videodata["status"] == "closed": # Page closed
             RPC.clear()
