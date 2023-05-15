@@ -1,7 +1,7 @@
 function senddata() {
     fetch("http://localhost:5000/video", {
         method: "POST",
-        body: JSON.stringify({"status": "videointro"}),
+        body: JSON.stringify({"status": "toppage"}),
         headers: {
             "Content-Type": "application/json; charset=UTF-8"
         }

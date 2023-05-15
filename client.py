@@ -24,7 +24,7 @@ while True:
             RPC.clear()
             beforevideodata = videodata
             continue
-        elif videodata["status"] == "videointro":
+        elif videodata["status"] == "toppage":
             RPC.update(
                 state="トップページ",
                 large_image="https://nicovideo.cdn.nimg.jp/web/images/favicon/144.png",

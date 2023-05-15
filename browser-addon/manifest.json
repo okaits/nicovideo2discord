@@ -13,7 +13,7 @@
         },
         {
             "matches": ["*://www.nicovideo.jp/video_top*"],
-            "js": ["videointroduction.js"]
+            "js": ["toppage.js"]
         },
         {
             "matches": ["*://www.nicovideo.jp/ranking*"],
