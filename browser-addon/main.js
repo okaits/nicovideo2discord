@@ -18,7 +18,8 @@ function senddata() { // Send video info
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
-    });
+    })
+    .catch(error => {console.log("Couldn't communicate to the server.")});
 };
 
 function end() { // Video ended
@@ -31,7 +32,8 @@ function end() { // Video ended
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
-    });
+    })
+    .catch(error => {console.log("Couldn't communicate to the server.")});
 };
 
 function close() { // Page closed
@@ -42,7 +44,8 @@ function close() { // Page closed
             "Content-type": "application/json; charset=UTF-8"
         },
         keepalive: true
-    });
+    })
+    .catch(error => {console.log("Couldn't communicate to the server.")});
 };
 
 function onload() { // Page opened
