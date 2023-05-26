@@ -28,8 +28,9 @@ genres = { #Genres list
     "other": "その他"
 }
 
-def debug(message: str, contentType: str = "text/plain") -> urllib.response:
-    headers = {"Content-Type": contentType}
+def debug(message: str, content_type: str = "text/plain") -> urllib.response:
+    """ Send debug message to server """
+    headers = {"Content-Type": content_type}
     req = urllib.request.Request("http://localhost:5000/debug", message.encode(), headers)
     return urllib.request.urlopen(req)
 
@@ -142,7 +143,7 @@ while True:
                 seconds=int(videodata["sec"])
             )
             startedtime = datetime.datetime.now().replace(microsecond=0) - playingtime
-        
+
         # Get author name
         if "user_nickname" in video:
             author = video["user_nickname"]
