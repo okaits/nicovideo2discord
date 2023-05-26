@@ -12,7 +12,7 @@
             "js": ["main.js"]
         },
         {
-            "matches": ["*://www.nicovideo.jp/video_top/"],
+            "matches": ["*://www.nicovideo.jp/video_top/", "*://www.nicovideo.jp/video_top", "*://www.nicovideo.jp/video_top/?*"],
             "js": ["toppage.js"]
         },
         {
