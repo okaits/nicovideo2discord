@@ -160,6 +160,11 @@ while True:
         # Set details message
         detailsmsg = f'投稿者: {author}'
 
+        # RICKROLL
+        if video["video_id"] == "sm5904539":
+            statemsg="リックロールされています"
+            detailsmsg="釣られた"
+
         # Post those informations into discord
         if videodata["playing"] is True:
             RPC.update(
