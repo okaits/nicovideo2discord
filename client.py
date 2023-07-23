@@ -54,7 +54,7 @@ while True:
         elif videodata["status"] == "toppage": # Top page
             RPC.update(
                 state="トップページ",
-                large_image="https://nicovideo.cdn.nimg.jp/web/images/favicon/144.png",
+                large_image="niconico_tvchan",
                 large_text="ニコニコテレビちゃん",
                 buttons=[
                     {
@@ -69,7 +69,7 @@ while True:
         elif videodata["status"] == "ranking": # Ranking Page
             RPC.update(
                 state="ランキングを閲覧中",
-                large_image="https://nicovideo.cdn.nimg.jp/web/images/favicon/144.png",
+                large_image="niconico_tvchan",
                 large_text="ニコニコテレビちゃん",
                 buttons=[
                     {
@@ -89,7 +89,7 @@ while True:
             RPC.update(
                 state=f'ジャンル: {genres[videodata["genre"]]}',
                 details="ジャンル別トップページを閲覧中",
-                large_image="https://nicovideo.cdn.nimg.jp/web/images/favicon/144.png",
+                large_image="niconico_tvchan",
                 large_text="ニコニコテレビちゃん",
                 buttons=[
                     {
@@ -170,10 +170,8 @@ while True:
             RPC.update(
                 state=statemsg,
                 details=detailsmsg,
-                large_image=thumbnail_url,
-                large_text=vid,
-                small_image="https://nicovideo.cdn.nimg.jp/web/images/favicon/144.png",
-                small_text="ニコニコテレビちゃん",
+                large_image="niconico_tvchan",
+                large_text="ニコニコテレビちゃん",
                 start=startedtime.timestamp(),
                 buttons=[
                     {"label": "動画を視聴する", "url": url},
@@ -185,10 +183,8 @@ while True:
             RPC.update(
                 state=statemsg,
                 details=detailsmsg,
-                large_image=thumbnail_url,
-                small_image="https://nicovideo.cdn.nimg.jp/web/images/favicon/144.png",
-                small_text="ニコニコテレビちゃん",
-                large_text="Thumbnail",
+                large_image="niconico_tvchan",
+                large_text="ニコニコテレビちゃん",
                 buttons=[
                     {"label": "動画を視聴する", "url": url},
                     {"label": "ニコニコ動画トップページ", "url": "https://www.nicovideo.jp/video_top/"}
