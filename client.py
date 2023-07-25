@@ -150,43 +150,43 @@ while True:
         else:
             author = video["ch_name"]
         # Set state message
-        statemsg = f'{video["title"]}'
+        detailmsg = f'{video["title"]}'
         if videodata["playing"] is False and videodata["ended"] is False:
-            statemsg = f'{statemsg} (一時停止中)'
+            detailmsg = f'{detailmsg} (一時停止中)'
         elif videodata["ended"] is True:
-            statemsg = f'{statemsg} (再生終了)'
+            detailmsg = f'{detailmsg} (再生終了)'
         if "speed" in videodata and videodata["speed"] != 1:
-            statemsg = f'{statemsg} ({videodata["speed"]}倍速)'
+            detailmsg = f'{detailmsg} ({videodata["speed"]}倍速)'
         # Set details message
-        detailsmsg = f'投稿者: {author}'
+        statemsg = f'投稿者: {author}, 動画長: {video["length"]}'
 
         # RICKROLL
         if video["video_id"] == "sm5904539":
-            statemsg="リックロールされています"
-            detailsmsg="釣られた"
+            detailmsg="リックロールされています"
+            statemsg="釣られた"
 
         # Post those informations into discord
         if videodata["playing"] is True:
             RPC.update(
+                details=detailmsg,
                 state=statemsg,
-                details=detailsmsg,
                 large_image="niconico_tvchan",
                 large_text="ニコニコテレビちゃん",
                 start=startedtime.timestamp(),
                 buttons=[
-                    {"label": "動画を視聴する", "url": url},
+                    {"label": f'動画を視聴する [{videodata["id"]}]', "url": url},
                     {"label": "ニコニコ動画トップページ", "url": "https://www.nicovideo.jp/video_top/"}
                 ],
                 instance=True
             )
         else:
             RPC.update(
+                details=detailmsg,
                 state=statemsg,
-                details=detailsmsg,
                 large_image="niconico_tvchan",
                 large_text="ニコニコテレビちゃん",
                 buttons=[
-                    {"label": "動画を視聴する", "url": url},
+                    {"label": f'動画を視聴する [{videodata["id"]}]', "url": url},
                     {"label": "ニコニコ動画トップページ", "url": "https://www.nicovideo.jp/video_top/"}
                 ]
             )
