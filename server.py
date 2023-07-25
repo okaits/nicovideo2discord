@@ -34,20 +34,20 @@ def video():
                 Data.status = {
                     "status": data["status"]
                 }
-                return jsonify({"msg": "success"}), "201 Created"
+                return jsonify({"msg": "success"}), "202 Accepted"
 
             elif data["status"] == "toppage" or data["status"] == "ranking": # Main top page or Ranking page
                 Data.status = {
                     "status": data["status"]
                 }
-                return jsonify({"msg": "success"}), "201 Created"
+                return jsonify({"msg": "success"}), "202 Accepted"
 
             elif data["status"] == "genretoppages": # Genre-separated top page
                 Data.status = {
                     "status": data["status"],
                     "genre": data["genre"]
                 }
-                return jsonify({"msg": "success"}), "201 Created"
+                return jsonify({"msg": "success"}), "202 Accepted"
 
             elif data["ended"] is True: # Video ended
                 Data.status = {
@@ -56,7 +56,7 @@ def video():
                     "ended": data["ended"],
                     "playing": data["playing"]
                 }
-                return jsonify({"msg": "success"}), "201 Created"
+                return jsonify({"msg": "success"}), "202 Accepted"
 
             Data.status = { # Watching video
                 "status": data["status"],
@@ -72,7 +72,7 @@ def video():
         except KeyError:
             return jsonify({"msg": "missing value"}), "400 Bad Request"
 
-        return jsonify({"msg": "success"}), "201 Created"
+        return jsonify({"msg": "success"}), "202 Accepted"
 
     elif request.method == "GET":
         return jsonify(Data.status), "200 OK"
