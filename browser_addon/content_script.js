@@ -17,9 +17,13 @@ const mutationObserver = new MutationObserver(() => {
             player.addEventListener("play", start_video);
             player.addEventListener("pause", stop_video);
             player.addEventListener("waiting", stop_video);
+            player.addEventListener("loadeddata", start_video);
+            player.addEventListener("seeking", stop_video);
+            player.addEventListener("error", stop_video);
             player.addEventListener("seeked", start_video);
             player.addEventListener("ended", stop_video);
             window.addEventListener("unload", stop_video);
+            if (!player.paused) {start_video();};
         };
         before_player = player;
     };
