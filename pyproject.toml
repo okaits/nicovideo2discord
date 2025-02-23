@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nicovideo2discord"
-version = "1.0.3"
+version = "1.0.4"
 description = "ニコニコ動画を見ている際の動画情報をDiscordのRich Presenceに表示します。"
 authors = ["okaits7534 <okaits@okaits7534.net>"]
 license = "MIT License"
