@@ -30,10 +30,9 @@ const mutationObserver = new MutationObserver(() => {
                 waiting = stop_video;
             };
 
-            player.addEventListener("play", wrapped_start_video);
+            player.addEventListener("playing", wrapped_start_video);
             player.addEventListener("pause", wrapped_stop_video);
             player.addEventListener("waiting", wrapped_stop_video);
-            player.addEventListener("loadeddata", wrapped_start_video);
             player.addEventListener("seeking", wrapped_stop_video);
             player.addEventListener("error", wrapped_stop_video);
             player.addEventListener("seeked", wrapped_start_video);
