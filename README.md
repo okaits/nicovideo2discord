@@ -1,6 +1,6 @@
 # nicovideo2discord
 ニコニコ動画を視聴する際に、自動的にDiscord Rich Presenceで共有する拡張機能です。 
-Ubuntu 24.04のChromiumで動作確認をしています。
+Ubuntu 24.04のChromiumで動作確認をしています。  
 [![pypresence](https://img.shields.io/badge/using-pypresence-00bb88.svg?style=for-the-badge&logo=discord&logoWidth=20)](https://github.com/qwertyquerty/pypresence)
 
 ## 使い方
@@ -8,15 +8,21 @@ Ubuntu 24.04のChromiumで動作確認をしています。
 
 ### Requirements
 * PC
-* ブラウザ
+* ブラウザ（Chromium系、もしくはFirefox）
 * Discord（Web版不可）
 
-### 初期設定
+### 初期設定（Chromium系の場合）
 1. ソースコードをダウンロード  
    [最新リリース](https://github.com/okaits/nicovideo2discord/releases/latest)から、`Source code (zip)`をダウンロードし、展開する。
 2. ブラウザに拡張機能をインストール  
-    （Chromium系の場合）`chrome://extensions`を開き、右上の「デベロッパー モード」をONにし、左上の「パッケージ化されていない拡張機能を読み込む」を押し、先ほどダウンロードしたソースコードの`browser_addon`フォルダーを選択する。
+    `chrome://extensions`を開き、右上の「デベロッパー モード」をONにし、左上の「パッケージ化されていない拡張機能を読み込む」を押し、先ほどダウンロードしたソースコードの`browser_addon`フォルダーを選択する。
 3. サーバーのダウンロード
+   [最新リリース](https://github.com/okaits/nicovideo2discord/releases/latest)から、Windowsなら`windows_amd64_executable_server.exe`を、Linuxなら`linux_amd64_executable_server.elf`をダウンロードする。
+
+### 初期設定（Firefoxの場合）
+1. ブラウザに拡張機能をインストール
+    [最新リリース](https://github.com/okaits/nicovideo2discord/releases/latest)から、`nicovideo2discord-[バージョン].xpi`をダウンロードしようとすると、自動的にポップアップでインストールするか聞かるので、インストールする。
+2. サーバーのダウンロード
    [最新リリース](https://github.com/okaits/nicovideo2discord/releases/latest)から、Windowsなら`windows_amd64_executable_server.exe`を、Linuxなら`linux_amd64_executable_server.elf`をダウンロードする。
 
 ### 使用

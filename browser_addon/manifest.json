@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "nicovideo2discord",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "ニコニコ動画を見ている際の動画情報をDiscordのRich Presenceに表示します。",
     "content_scripts": [
         {
@@ -10,5 +10,11 @@
             "run_at": "document_end",
             "all_frames": true
         }
-    ]
+    ],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "nicovideo2discord@firefox.extensions.okaits7534.net",
+            "update_url": "https://www.okaits7534.net/firefox-extensions/updates.json"
+        }
+    }
 }
