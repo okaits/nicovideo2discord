@@ -10,5 +10,11 @@
             "run_at": "document_end",
             "all_frames": true
         }
-    ]
+    ],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "nicovideo2discord@firefox.extensions.okaits7534.net",
+            "update_url": "https://www.okaits7534.net/firefox-extensions/updates.json"
+        }
+    }
 }
