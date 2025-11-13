@@ -17,7 +17,7 @@ orjson = "^3.10.6"
 nicovideo-py = "^4.1.0"
 
 [tool.poetry.group.dev.dependencies]
-pylint = "^3.2.6"
+pylint = "^4.0.3"
 mypy = "^1.11.1"
 
 [build-system]
